@@ -53,7 +53,7 @@ async def add_promo(message: types.Message):
 async def check(message: types.Message):
   payload = {'account': int(KEKSIK_ACCOUNT), "token": KEKSIK_TOKEN, "id": 63}
   res = requests.post("https://tg.keksik.io/api/1.0/donates/get", data=json.dumps(payload)).json()
-  if int(res['list'][0]['user'])==int(message.from_user.id) and str(res['list'][0]['status'])!="hidden":
+  if ((int(res['list'][0]['user'])==int(message.from_user.id)) and (str(res['list'][0]['status'])!="hidden")):
 
       payload_2 = {'account': int(KEKSIK_ACCOUNT), "token": KEKSIK_TOKEN, "id": int(res['list'][0]['id']), "status": "hidden"}
       res_2 = requests.post("https://tg.keksik.io/api/1.0/donates/change-status", data=json.dumps(payload_2)).json()
